@@ -12,9 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-    <Folder Include="Identity\" />
-    <Folder Include="Persistence\" />
+    <Folder Include="Identity\Extensions\" />
+    <Folder Include="Identity\Options\" />
+    <Folder Include="Identity\Services\" />
   </ItemGroup>
 
 	<ItemGroup>

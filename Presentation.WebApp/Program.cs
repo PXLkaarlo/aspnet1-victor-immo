@@ -1,5 +1,3 @@
-using Application;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add references to application and infrastructure projects

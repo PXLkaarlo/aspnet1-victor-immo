@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\" />
     <Folder Include="Views\Shared\Partials\Common\" />
     <Folder Include="Views\Shared\Partials\Sections\" />
   </ItemGroup>
