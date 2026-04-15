@@ -31,6 +31,7 @@ internal class IdentityInitalizer
             // By the Omnissiah, This catch block is just left empty in the original code.
             // Shouldn't the try catch only be used for testing? Or am I missing something?
             // This isn't even the only time this happens in this project.
+            throw new Exception("An error occurred while initializing default roles.");
         }
     }
 
@@ -67,6 +68,7 @@ internal class IdentityInitalizer
         }
         catch
         {
+            // Just in case something goes wrong, I put this here.
             throw new Exception("An error occurred while initializing default admin accounts.");
         }
     }

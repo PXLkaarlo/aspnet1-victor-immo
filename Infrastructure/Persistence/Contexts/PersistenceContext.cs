@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,12 +15,12 @@ namespace Infrastructure.Persistence.Contexts;
 //{
 //    public DemoPersistanceContext(DbContextOptions options) : base(options)
 //    {
-//        CTRL + . on constructor to put as primary constructor and remove the unused one.
+//        CTRL + . on constructor to put as primary constructor. Remove the unused one beforehand.
 //    }
 //}
 //result this:
 
-public class PersistenceContext(DbContextOptions<PersistenceContext> options) : IdentityDbContext<AppUser>(options)
+public class PersistenceContext(DbContextOptions<PersistenceContext> options) : IdentityDbContext<AppUser, IdentityRole, string>(options)
 {
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -28,13 +29,3 @@ public class PersistenceContext(DbContextOptions<PersistenceContext> options) : 
         builder.ApplyConfigurationsFromAssembly(typeof(PersistenceContext).Assembly);
     }
 }
-
-// delete this comment later, for secrets.json 
-//{
-//  "Authentication": {
-//    "GitHub": {
-//      "ClientId": "",
-//      "ClientSecret": ""
-//    }
-//  }
-//}
