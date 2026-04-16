@@ -1,0 +1,36 @@
+﻿@{
+}
+
+<section class="section__header">
+    <div class="logotype">
+        <a href="/"><img src="~/images/logotype.png" alt="CoreFitness" /></a>
+    </div>
+
+    <nav class="main-menu">
+        <ul class="menu">
+            <li class="menu-item">
+                <a class="menu-item-link">asp-action="index" asp-controller="FitnessCenters" Fitness Centers</a>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-item-link">asp-action="index" asp-controller="Memberships" Memberships</a>
+            </li>
+
+            <li class="menu-item">
+                <a class="menu-item-link">asp-action="index" asp-controller="Training" Training</a>
+            </li>
+        </ul>
+    </nav>
+
+    <nav class="account-menu">
+        <input type="checkbox" id="account-menu-toggle" />
+        @if (true)
+        {
+            <h1>True yes good!</h1>
+        }
+        else
+        {
+            <h1>Go Fuck Yourself!</h1>
+        }
+    </nav>
+</section>

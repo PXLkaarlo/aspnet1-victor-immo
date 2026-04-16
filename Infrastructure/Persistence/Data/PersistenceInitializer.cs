@@ -15,9 +15,16 @@ internal static class PersistenceInitializer
         {
             await context.Database.MigrateAsync();
         }
-        catch
+        catch (Exception ex)
         {
-            // Log the exception or handle it as needed
+            // One of the most common way to handle exceptions, log the error and rethrow it.
+            // Log the exception or handle it as needed.
+            Console.Error.WriteLine("An error occurred while initializing the database: " + ex);
+
+            throw; // Keep the original stack trace intact by rethrowing the exception without specifying it again.
+
+            // This will rethrow the exception to be handled by the caller,
+            // which can be useful for logging or other error handling strategies.
         }
     }
 }

@@ -25,13 +25,10 @@ internal class IdentityInitalizer
                     await roleManager.CreateAsync(role);
             }
         }
-        catch
+        catch (Exception ex)
         {
-            // Handle exceptions if needed
-            // By the Omnissiah, This catch block is just left empty in the original code.
-            // Shouldn't the try catch only be used for testing? Or am I missing something?
-            // This isn't even the only time this happens in this project.
-            throw new Exception("An error occurred while initializing default roles.");
+            Console.Error.WriteLine("An error occurred while initializing default roles: " + ex);
+            throw;
         }
     }
 
@@ -66,10 +63,13 @@ internal class IdentityInitalizer
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
-            // Just in case something goes wrong, I put this here.
-            throw new Exception("An error occurred while initializing default admin accounts.");
+            Console.Error.WriteLine("An error occurred while initializing default ADMIN accounts: " + ex);
+            throw;
+
+            // By the Omnissiah. I made it so heretical before.
+            // I pray to the Machine God that this new way of handling errors will please it.
         }
     }
 }

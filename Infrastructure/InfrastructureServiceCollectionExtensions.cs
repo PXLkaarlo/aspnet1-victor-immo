@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Infrastructure.Identity.Extensions;
+using Infrastructure.Persistence.Extensions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -9,10 +11,10 @@ public static class InfrastructureServiceCollectionExtensions
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IHostEnvironment environment)
     {
         // From Persistence/Extensions/PersistenceServiceCollectionExtensions.cs
-        services.AddPersistence();
+        services.AddPersistence(configuration, environment);
 
         // From Identity/Extensions/IdentityServiceCollectionExtensions.cs
-        services.notyetAddIdentity();
+        services.AddIdentity(configuration);
 
         return services;
     }
