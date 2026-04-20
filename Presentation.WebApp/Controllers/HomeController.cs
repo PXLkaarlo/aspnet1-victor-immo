@@ -1,12 +1,15 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Presentation.WebApp.Controllers
+namespace Presentation.WebApp.Controllers;
+
+[Route("")]
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    [HttpGet("")]
+    [AllowAnonymous]
+    public IActionResult Index()
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        return View();
     }
 }

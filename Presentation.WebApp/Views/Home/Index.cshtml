@@ -1,7 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@section Hero {
+    <partial name="Partials/Sections/_HeroSection" />
 }
 
-<div>
-    <h1>Header</h1>
+<div class="page__home">
+    <partial name="Partials/Sections/_BrandSection" />
+    <partial name="Partials/Sections/_AboutUsSection" />
+    <partial name="Partials/Sections/_OurProgramsSection" />
+    <partial name="Partials/Sections/_OurStoreSection" />
 </div>

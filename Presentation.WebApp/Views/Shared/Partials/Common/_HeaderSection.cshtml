@@ -1,4 +1,5 @@
 ﻿@{
+    // Why is this @{} here?
 }
 
 <section class="section__header">
@@ -9,28 +10,47 @@
     <nav class="main-menu">
         <ul class="menu">
             <li class="menu-item">
-                <a class="menu-item-link">asp-action="index" asp-controller="FitnessCenters" Fitness Centers</a>
+                <a class="menu-item-link" asp-action="index" asp-controller="FitnessCenters"> Fitness Centers</a>
             </li>
 
             <li class="menu-item">
-                <a class="menu-item-link">asp-action="index" asp-controller="Memberships" Memberships</a>
+                <a class="menu-item-link" asp-action="index" asp-controller="Memberships"> Memberships</a>
             </li>
 
             <li class="menu-item">
-                <a class="menu-item-link">asp-action="index" asp-controller="Training" Training</a>
+                <a class="menu-item-link" asp-action="index" asp-controller="Training"> Training</a>
             </li>
         </ul>
     </nav>
 
     <nav class="account-menu">
-        <input type="checkbox" id="account-menu-toggle" />
-        @if (true)
-        {
-            <h1>True yes good!</h1>
-        }
-        else
-        {
-            <h1>Go Fuck Yourself!</h1>
-        }
+        <ul class="menu">
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="menu-item">
+                        <a class="menu-item-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin Center</a>
+                    </li>
+                }
+
+                <li class="menu-item">
+                    <a class="menu-item-link" asp-area="Account" asp-controller="Account" asp-action="Index">My Account</a>
+                </li>
+            }
+            else
+            {
+                <li class="menu-item">
+                    <a class="menu-item-link" asp-area="Authentication" asp-controller="SignUp" asp-action="GetStarted">Become a Member</a>
+                </li>
+
+                <li class="menu-item">
+                    <a class="btn accent" asp-area="Authentication" asp-controller="SignIn" asp-action="SignIn">Sign in</a>
+                </li>
+            }
+        </ul>
     </nav>
+
+    <button id="moble-menu-button" data-target="#moble-menu-flyout" class="moble-btn accent"></button>
+
 </section>
