@@ -69,7 +69,7 @@ internal class IdentityInitalizer
             throw;
 
             // By the Omnissiah. I made it so heretical before.
-            // I pray to the Machine God that this new way of handling errors will please it.
+            // I pray to the Machine God that it will be pleased with this new way of handling errors.
         }
     }
 }
