@@ -23,7 +23,8 @@ public class AppUser : IdentityUser
     }
 
     // This is an overloaded factory method to create an AppUser with more details.
-    public static AppUser Create(string email, string? firstName = null, string? lastName = null, string? imageUrl = null)
+    public static AppUser Create(
+        string email, string? firstName = null, string? lastName = null, string? imageUrl = null, bool emailConfirmed = false)
     {
         return new AppUser
         {
@@ -31,7 +32,8 @@ public class AppUser : IdentityUser
             Email = email.Trim().ToLowerInvariant(),
             FirstName = firstName?.Trim(),
             LastName = lastName?.Trim(),
-            ImageUrl = imageUrl ?? "profile-image-avatar.png"
+            ImageUrl = imageUrl ?? "profile-image-avatar.png",
+            EmailConfirmed = emailConfirmed
         };
     }
 

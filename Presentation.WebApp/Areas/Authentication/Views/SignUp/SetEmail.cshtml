@@ -1,0 +1,43 @@
+﻿@model SetEmailViewModel
+@{
+    ViewData["Title"] = "Become a Member";
+}
+
+<section class="section__auth">
+    <div class="title">
+        <h1>Become a Member</h1>
+        <p>
+            Sign up to continue your fitness journey with full access to your customized program, training history, and progress tracking. Stay consistent, monitor your development, and keep moving forward with the structure and support built into your account.
+        </p>
+    </div>
+
+    <hr />
+
+    <form id="setEmailForm" method="post" asp-area="Authentication" asp-controller="SignUp" asp-action="SetEmail" novalidate>
+        @Html.AntiForgeryToken()
+
+        <div data-type="email" class="form-group">
+            <label class="form-label" asp-for="Form.Email"></label>
+            <input class="form-input" asp-for="Form.Email" />
+            <span class="field-validation" asp-validation-for="Form.Email"></span>
+        </div>
+
+        <button data-type="submit" class="btn" type="submit">Continue</button>
+
+        <div data-type="terms">
+            <div class="form-group form-checkbox-group">
+                <input data-type="ch-check" class="form-checkbox" asp-for="Form.TermsAndConditions" />
+                <label data-type="ch-label" class="form-label" asp-for="Form.TermsAndConditions">I accept the User Terms & Conditions.</label>
+            </div>
+            <span data-type="ch-error" class="field-validation" asp-validation-for="Form.TermsAndConditions"></span>
+        </div>
+
+
+        <div data-type="error" class="form-errormessage">
+            <span class="field-validation-error" asp-validation-for="ErrorMessage"></span>
+        </div>
+
+        <div asp-validation-summary="ModelOnly"></div>
+    </form>
+
+</section>

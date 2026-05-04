@@ -40,6 +40,8 @@ public static class IdentityServiceCollectionExtensions
         // Will work on this later. Need to ensure regular identity services are working first before adding external providers.
 
 
+        services.AddScoped<IAuthService, IdentityAuthService>();
+
         services.AddScoped<IAccountService, IdentityAccountService>();
 
         return services;

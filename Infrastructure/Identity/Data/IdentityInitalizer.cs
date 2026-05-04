@@ -39,9 +39,9 @@ internal class IdentityInitalizer
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-        var defaultAdmins = new List<string>()
+        var defaultAdmins = new List<AppUser>
         {
-            "admin@domain.local",
+            AppUser.Create("admin@domain.local", null, null, null, true)
         };
 
         try
@@ -53,13 +53,13 @@ internal class IdentityInitalizer
 
                 foreach (var admin in defaultAdmins)
                 {
-                    var user = AppUser.Create(admin);
-                    user.EmailConfirmed = true;
+                    var created = await userManager.CreateAsync(admin, defaultPassword);
 
-                    var created = await userManager.CreateAsync(user, defaultPassword);
-
-                    if (created.Succeeded && await roleManager.RoleExistsAsync(defaultRoleName))
-                        await userManager.AddToRoleAsync(user, defaultRoleName);
+                    if (created.Succeeded)
+                    {
+                        if (await roleManager.RoleExistsAsync(defaultRoleName))
+                            await userManager.AddToRoleAsync(admin, defaultRoleName);
+                    }
                 }
             }
         }
@@ -68,7 +68,7 @@ internal class IdentityInitalizer
             Console.Error.WriteLine("An error occurred while initializing default ADMIN accounts: " + ex);
             throw;
 
-            // By the Omnissiah. I made it so heretical before.
+            // By the Omnissiah. I made such heretical mistakes against tech before.
             // I pray to the Machine God that it will be pleased with this new way of handling errors.
         }
     }
