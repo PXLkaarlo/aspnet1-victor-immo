@@ -12,7 +12,9 @@ public class IdentityAccountService(UserManager<AppUser> userManager) : IAccount
         if (string.IsNullOrWhiteSpace(userId))
             throw new ArgumentNullException(nameof(userId));
 
+
         var user = await userManager.FindByIdAsync(userId);
+
         if (user is null)
             return AccountResult.NotFound();
 
@@ -29,11 +31,14 @@ public class IdentityAccountService(UserManager<AppUser> userManager) : IAccount
         return AccountResult.Success(details);
     }
 
+
     public async Task<AccountResult> UpdateUserAccountDetailsAsync(UpdateAccountDetails details)
     {
         ArgumentNullException.ThrowIfNull(details);
 
+
         var user = await userManager.FindByIdAsync(details.UserId);
+
         if (user is null)
             return AccountResult.NotFound();
 
@@ -45,9 +50,10 @@ public class IdentityAccountService(UserManager<AppUser> userManager) : IAccount
 
 
         var result = await userManager.UpdateAsync(user);
+
         return result.Succeeded
             ? AccountResult.Success()
-            : AccountResult.Failed(result.Errors.FirstOrDefault()?.Description ?? "Unable to save changes");
+            : AccountResult.Failed(result.Errors.FirstOrDefault()?.Description ?? "Failed to save changes");
 
 
         // This makes it more readable, but is not needed in this case.
@@ -58,6 +64,7 @@ public class IdentityAccountService(UserManager<AppUser> userManager) : IAccount
         //return AccountResult.Failed(errorMessage);
     }
 
+
     public async Task<AccountResult> DeleteUserAccountAsync(string userId)
     {
         if (string.IsNullOrWhiteSpace(userId))
@@ -65,11 +72,13 @@ public class IdentityAccountService(UserManager<AppUser> userManager) : IAccount
 
 
         var user = await userManager.FindByIdAsync(userId);
+
         if (user is null)
             return AccountResult.NotFound();
 
 
         var deleted = await userManager.DeleteAsync(user);
+
         return deleted.Succeeded
             ? AccountResult.Success()
             : AccountResult.Failed(deleted.Errors.FirstOrDefault()?.Description ?? "Unable to delete user account");

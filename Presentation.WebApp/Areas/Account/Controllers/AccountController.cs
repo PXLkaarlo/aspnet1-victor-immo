@@ -26,18 +26,19 @@ public class AccountController(IAccountService accountService, IAuthService auth
         if (!string.IsNullOrWhiteSpace(userId))
         {
             var account = await accountService.GetUserAccountAsync(userId);
+
             var accountDetails = account.Details;
 
             var viewModel = new AboutMeViewModel
             {
-                AboutMeForm = new AboutMeForm
+                Form = new AboutMeForm
                 {
                     FirstName = accountDetails?.FirstName ?? "",
                     LastName = accountDetails?.LastName ?? "",
                     Email = accountDetails?.Email ?? "",
                     PhoneNumber = accountDetails?.PhoneNumber ?? ""
                 },
-                ProfileImageUrl = accountDetails?.ImageUrl ?? "~/images/profile-image-avatar.png"
+                ProfileImageUrl = accountDetails?.ImageUrl ?? "/images/profile-image-avatar.png"
                 // This default image URL will be tricky to handle later.
                 // Needs to be resolved in the view file.
             };
@@ -56,6 +57,7 @@ public class AccountController(IAccountService accountService, IAuthService auth
     public async Task<IActionResult> AboutMe(AboutMeViewModel viewModel)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
         if (string.IsNullOrWhiteSpace(userId))
         {
             Console.Error.WriteLine("Failed to retrieve user ID: " + userId);
@@ -63,7 +65,9 @@ public class AccountController(IAccountService accountService, IAuthService auth
             return RedirectToAction(nameof(SignOut));
         }
 
+
         var account = await accountService.GetUserAccountAsync(userId);
+
         if (account.Details is null)
         {
             Console.Error.WriteLine("Failed to retrieve account details for user ID: " + userId);
@@ -73,20 +77,25 @@ public class AccountController(IAccountService accountService, IAuthService auth
 
 
         var existingImageUrl = account.Details.ImageUrl;
-        var displayImageUrl = existingImageUrl ?? "~/images/profile-image-avatar.png";
+
+        var displayImageUrl = existingImageUrl ?? "/images/profile-image-avatar.png";
+
         viewModel.ProfileImageUrl = displayImageUrl;
 
+
         if (!ModelState.IsValid)
-        {
             return View(viewModel);
-        }
-        if (viewModel.AboutMeForm is null)
+        
+        
+        if (viewModel.Form is null)
         {
             ModelState.AddModelError(string.Empty, "Invalid form submission.");
+
             return View(viewModel);
         }
 
-        var viewModelForm = viewModel.AboutMeForm;
+
+        var viewModelForm = viewModel.Form;
 
         var imageUrl = existingImageUrl;
 
@@ -127,6 +136,7 @@ public class AccountController(IAccountService accountService, IAuthService auth
     public new async Task<IActionResult> SignOut()
     {
         await authService.SignOutUserAsync();
+
         return Redirect("/");
     }
 
@@ -135,17 +145,22 @@ public class AccountController(IAccountService accountService, IAuthService auth
     public async Task<IActionResult> RemoveAccount()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
         if (!string.IsNullOrWhiteSpace(userId))
         {
             var deleted = await accountService.DeleteUserAccountAsync(userId);
+
             if (!deleted.Succeeded)
             {
                 ViewBag.Message = deleted.ErrorMessage;
+
                 return View();
             }
         }
 
+
         await authService.SignOutUserAsync();
+
         return Redirect("/");
     }
 
@@ -156,14 +171,21 @@ public class AccountController(IAccountService accountService, IAuthService auth
     private static async Task<string> SaveProfileImageAsync(IFormFile file)
     {
         var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "profiles");
+
         Directory.CreateDirectory(uploadsFolder);
 
+
         var extension = Path.GetExtension(file.FileName);
+
         var fileName = $"{Guid.NewGuid()}{extension}";
+
         var filePath = Path.Combine(uploadsFolder, fileName);
 
+
         await using var stream = new FileStream(filePath, FileMode.Create);
+
         await file.CopyToAsync(stream);
+
 
         return $"/uploads/profiles/{fileName}";
     }

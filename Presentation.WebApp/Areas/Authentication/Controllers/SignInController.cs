@@ -25,6 +25,7 @@ public class SignInController(SignInManager<AppUser> signInManager, UserManager<
     public IActionResult SignIn(string? returnUrl = null)
     {
         ViewBag.ReturnUrl = returnUrl;
+
         var redirectPath = AuthenticationRedirectManager.GetRedirectPath(User, _redirectPaths);
 
         return !string.IsNullOrWhiteSpace(redirectPath)
@@ -93,6 +94,7 @@ public class SignInController(SignInManager<AppUser> signInManager, UserManager<
     public IActionResult ExternalLogin(string provider, string? returnUrl = null)
     {
         var callbackUrl = Url.Action(nameof(ExternalLoginCallback), "SignIn", new { area = "Authentication", returnUrl });
+
         var properties = signInManager.ConfigureExternalAuthenticationProperties(provider, callbackUrl);
 
         return Challenge(properties, provider);
@@ -105,8 +107,10 @@ public class SignInController(SignInManager<AppUser> signInManager, UserManager<
         if (!string.IsNullOrWhiteSpace(remoteError))
         {
             TempData["ErrorMessage"] = $"External login error: { remoteError }";
+
             return RedirectToAction(nameof(SignIn), new { returnUrl });
         }
+
 
         var info = await signInManager.GetExternalLoginInfoAsync();
 
@@ -142,7 +146,7 @@ public class SignInController(SignInManager<AppUser> signInManager, UserManager<
                 _ => null
             };
 
-        //var array = new[] { email, firstName, lastName, imageUrl };
+        //var[] array = { email, firstName, lastName, imageUrl };
 
         //foreach (var item in array)
         //{
@@ -163,7 +167,9 @@ public class SignInController(SignInManager<AppUser> signInManager, UserManager<
 
 
         var user = await userManager.FindByEmailAsync(email);
+
         user ??= AppUser.Create(email, firstName, lastName, imageUrl);
+
 
         var created = await userManager.CreateAsync(user);
 

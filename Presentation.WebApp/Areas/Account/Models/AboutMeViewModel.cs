@@ -2,7 +2,7 @@
 
 public class AboutMeViewModel
 {
-    public AboutMeForm AboutMeForm { get; set; } = new AboutMeForm();
+    public AboutMeForm Form { get; set; } = new AboutMeForm();
     public string? Message { get; set; }
     public string? ProfileImageUrl { get; set; }
 }
