@@ -8,25 +8,40 @@
     <div class="profile-image">
         @if (!string.IsNullOrWhiteSpace(Model.ProfileImageUrl))
         {
-            <img src="@Model.ProfileImageUrl" alt="user profile image" />
+            <img src="@Url.Content(Model.ProfileImageUrl)" alt="user profile image" />
+        }
+        else
+        {
+            <img src="~/images/profile-image-avatar.png" alt="user profile image" />
         }
 
     </div>
 
-    <nav class="menu-options">
-        <ul>
-            <li>
-                Menu Options
+    <nav class="account-options-menu menu-options">
+        <div class="options-menu-title">
+            Options
+        </div>
+        <ul class="options">
+            <li class="option-item">
+                <a class="option-item-link" asp-area="Account" asp-controller="Account" asp-action="AboutMe">About Me</a>
             </li>
 
-            <li>
-                <a asp-area="Account" asp-controller="Account" asp-action="SignOut">Sign Out</a>
+            <li class="option-item">
+                <a class="option-item-link" asp-area="Account" asp-controller="AccountMembership" asp-action="Index">My Membership</a>
+            </li>
+
+            <li class="option-item">
+                <a class="option-item-link" asp-area="Account" asp-controller="AccountBookings" asp-action="Index">My Bookings</a>
+            </li>
+
+            <li class="option-item">
+                <a class="option-item-link" asp-area="Account" asp-controller="Account" asp-action="SignOut">Sign Out</a>
             </li>
         </ul>
     </nav>
 
     <div class="remove-account">
-        <p>If you like to cancel your account click below</p>
+        <p>If you like to remove your account click below</p>
         <a asp-area="Account" asp-controller="Account" asp-action="RemoveAccount">Remove Account</a>
     </div>
 

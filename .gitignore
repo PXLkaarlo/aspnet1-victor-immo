@@ -3,6 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Custom ignore rules for Visual Studio can be added here.
+
 # User-specific files
 *.rsuser
 *.suo

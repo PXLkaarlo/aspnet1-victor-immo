@@ -38,7 +38,7 @@ public class AccountController(IAccountService accountService, IAuthService auth
                     Email = accountDetails?.Email ?? "",
                     PhoneNumber = accountDetails?.PhoneNumber ?? ""
                 },
-                ProfileImageUrl = accountDetails?.ImageUrl ?? "/images/profile-image-avatar.png"
+                ProfileImageUrl = accountDetails?.ImageUrl
                 // This default image URL will be tricky to handle later.
                 // Needs to be resolved in the view file.
             };
@@ -76,11 +76,9 @@ public class AccountController(IAccountService accountService, IAuthService auth
         }
 
 
-        var existingImageUrl = account.Details.ImageUrl;
+        var imageUrl = account.Details.ImageUrl;
 
-        var displayImageUrl = existingImageUrl ?? "/images/profile-image-avatar.png";
-
-        viewModel.ProfileImageUrl = displayImageUrl;
+        viewModel.ProfileImageUrl = imageUrl;
 
 
         if (!ModelState.IsValid)
@@ -93,11 +91,9 @@ public class AccountController(IAccountService accountService, IAuthService auth
 
             return View(viewModel);
         }
-
+        
 
         var viewModelForm = viewModel.Form;
-
-        var imageUrl = existingImageUrl;
 
         if (viewModelForm.ProfileImage is not null && viewModelForm.ProfileImage.Length > 0)
         {
