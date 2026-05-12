@@ -28,7 +28,7 @@ internal class IdentityInitalizer
         catch (Exception ex)
         {
             Console.Error.WriteLine("An error occurred while initializing default roles: " + ex);
-            throw;
+            //throw;
         }
     }
 
@@ -66,10 +66,9 @@ internal class IdentityInitalizer
         catch (Exception ex)
         {
             Console.Error.WriteLine("An error occurred while initializing default ADMIN accounts: " + ex);
-            throw;
+            //throw;
 
-            // By the Omnissiah. I made such heretical mistakes against tech before.
-            // I pray to the Machine God that it will be pleased with this new way of handling errors.
+            // By the Omnissiah.
         }
     }
 }
