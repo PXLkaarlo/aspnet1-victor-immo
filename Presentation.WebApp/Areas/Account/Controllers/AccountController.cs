@@ -23,6 +23,7 @@ public class AccountController(IAccountService accountService, IAuthService auth
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)
             ?? throw new InvalidOperationException("User ID claim is missing.");
 
+
         if (!string.IsNullOrWhiteSpace(userId))
         {
             var account = await accountService.GetUserAccountAsync(userId);

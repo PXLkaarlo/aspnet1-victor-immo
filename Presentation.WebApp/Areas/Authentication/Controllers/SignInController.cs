@@ -117,6 +117,7 @@ public class SignInController(SignInManager<AppUser> signInManager, UserManager<
         if (info is null)
         {
             TempData["ErrorMessage"] = "Could not load external login information.";
+
             return RedirectToAction(nameof(SignIn), new { returnUrl });
         }
 
@@ -162,6 +163,7 @@ public class SignInController(SignInManager<AppUser> signInManager, UserManager<
         if (string.IsNullOrWhiteSpace(email))
         {
             TempData["ErrorMessage"] = $"No email address was returned from {info.LoginProvider}.";
+
             return RedirectToAction(nameof(SignIn), new { returnUrl });
         }
 
@@ -176,6 +178,7 @@ public class SignInController(SignInManager<AppUser> signInManager, UserManager<
         if (!created.Succeeded)
         {
             TempData["ErrorMessage"] = string.Join(", ", created.Errors.Select(x => x.Description));
+
             return RedirectToAction(nameof(SignIn), new { returnUrl });
         }
 
@@ -185,14 +188,17 @@ public class SignInController(SignInManager<AppUser> signInManager, UserManager<
         if (!roleadded.Succeeded)
         {
             TempData["ErrorMessage"] = string.Join(", ", roleadded.Errors.Select(x => x.Description));
+
             return RedirectToAction(nameof(SignIn), new { returnUrl });
         }
+
 
         var addedExternalLogin = await userManager.AddLoginAsync(user, info);
 
         if (!addedExternalLogin.Succeeded && addedExternalLogin.Errors.All(x => x.Code != "LoginAlreadyAssociated"))
         {
             TempData["ErrorMessage"] = string.Join(", ", addedExternalLogin.Errors.Select(x => x.Description));
+
             return RedirectToAction(nameof(SignIn), new { returnUrl });
         }
 
@@ -202,6 +208,7 @@ public class SignInController(SignInManager<AppUser> signInManager, UserManager<
         if (string.IsNullOrWhiteSpace(returnUrl))
         {
             var redirectPath = AuthenticationRedirectManager.GetRedirectPath(User, _redirectPaths);
+
             returnUrl = redirectPath ?? "/";
         }
 

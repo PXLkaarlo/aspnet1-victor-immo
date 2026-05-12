@@ -1,8 +1,6 @@
 ﻿namespace Domain;
 
-public class Placeholder
+public class Placeholder(string value = "This is a placeholder from Domain.")
 {
-    public string Value { get; set; } = null!;
-
-    public Placeholder(string value = "This is a placeholder from Domain.") => Value = value;
+    public string Value { get; set; } = value;
 }

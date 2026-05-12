@@ -15,15 +15,17 @@
     <link rel="stylesheet" href="~/css/theme.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="account-layout">
+    <div class="dashboard-layout">
         <header>
             <partial name="Partials/Common/_HeaderSection" />
         </header>
 
+        <partial name="Partials/Common/_PageTitleSection" />
         <div class="container">
             @RenderBody()
         </div>
     </div>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -17,11 +17,11 @@
 
     </div>
 
-    <nav class="account-options-menu menu-options">
+    <nav class="account-options options">
         <div class="options-menu-title">
-            Options
+            <h3>Options</h3>
         </div>
-        <ul class="options">
+        <ul class="options-menu">
             <li class="option-item">
                 <a class="option-item-link" asp-area="Account" asp-controller="Account" asp-action="AboutMe">About Me</a>
             </li>
@@ -40,9 +40,9 @@
         </ul>
     </nav>
 
-    <div class="remove-account">
+    <div class="option-input">
         <p>If you like to remove your account click below</p>
-        <a asp-area="Account" asp-controller="Account" asp-action="RemoveAccount">Remove Account</a>
+        <a class="btn remove-account" asp-area="Account" asp-controller="Account" asp-action="RemoveAccount">Remove Account</a>
     </div>
 
 </aside>
@@ -84,7 +84,7 @@
 
             <div data-type="file" class="form-group">
                 <label class="form-label" asp-for="Form.ProfileImage"></label>
-                <input class="form-input" asp-for="Form.ProfileImage" />
+                <input class="btn form-input" asp-for="Form.ProfileImage" />
                 <span class="form-field-validation" asp-validation-for="Form.ProfileImage"></span>
             </div>
 

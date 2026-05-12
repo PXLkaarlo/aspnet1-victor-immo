@@ -11,7 +11,7 @@ public class SetPasswordForm
 
 
     [Required(ErrorMessage = "Password must be confirmed.")]
-    [Compare(nameof(Password), ErrorMessage = "Passwords do not match.")]
+    [Compare(nameof(Password), ErrorMessage = "Passwords must match.")]
     [DataType(DataType.Password)]
     [Display(Name = "Confirm Password", Prompt = "Confirm  password")]
     public string ConfirmPassword { get; set; } = null!;

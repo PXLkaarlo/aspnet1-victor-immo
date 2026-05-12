@@ -1,1 +1,35 @@
-﻿<partial name="Partioals/Common/_PageTitleSection" />
+﻿@{
+    ViewData["Title"] = "Our Memberships";
+}
+
+<partial name="Partials/Common/_PageTitleSection" />
+
+<main>
+    <section class="memberships">
+
+        <div class="title">
+            <h3>Membership options</h3>
+            <hr />
+        </div>
+
+        <form id="membershipForm" method="get" asp-controller="Memberships" asp-action="Index" novalidate>
+
+            <div class="form-group">
+                <button class="btn">Standard</button>
+            </div>
+
+            <div class="form-group">
+                <button class="btn">Plus</button>
+            </div>
+
+            <div class="form-group">
+                <button class="btn">Premium</button>
+            </div>
+
+            <div class="form-errormessage">
+                <span class="field-validation-error">@TempData["ErrorMessage"]?.ToString()</span>
+            </div>
+
+        </form>
+    </section>
+</main>

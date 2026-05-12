@@ -10,7 +10,8 @@ public class MembershipsController : Controller
     [AllowAnonymous]
     public IActionResult Index()
     {
-        ViewData["Title"] = "Our Memberships";
+        TempData["ErrorMessage"] = "Not implemented yet.";
+
         return View();
     }
 }
