@@ -88,8 +88,6 @@ public class IdentityAuthService(UserManager<AppUser> userManager, SignInManager
             return AuthResult.Failed("Incorrect email address or password.");
 
 
-
-
         return AuthResult.Success();
     }
 

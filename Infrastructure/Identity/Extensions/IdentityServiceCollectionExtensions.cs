@@ -32,7 +32,7 @@ public static class IdentityServiceCollectionExtensions
 
             x.Cookie.IsEssential = true;
             x.Cookie.Name = "corefitness_auth_cookie";
-            x.ExpireTimeSpan = TimeSpan.FromDays(30);
+            x.ExpireTimeSpan = TimeSpan.FromDays(31);
             x.SlidingExpiration = true;
         });
 
