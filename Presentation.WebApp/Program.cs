@@ -34,7 +34,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-// This Initializer will create the database if it doesn't exist,
+// This Initializer will automatically create the database if it doesn't exist,
 // and seed it with default data (default roles and default admin accounts).
 await InfrastructureInitializer.InitializeAsync(app.Services);
 

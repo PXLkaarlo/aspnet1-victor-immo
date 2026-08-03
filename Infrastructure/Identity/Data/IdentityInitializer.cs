@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Identity.Data;
 
-internal class IdentityInitalizer
+internal class IdentityInitializer
 {
-    public static async Task InitilizeDefaultRolesAsync(IServiceProvider serviceProvider)
+    public static async Task InitializeDefaultRolesAsync(IServiceProvider serviceProvider)
     {
         await using var scope = serviceProvider.CreateAsyncScope();
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -33,7 +33,7 @@ internal class IdentityInitalizer
     }
 
 
-    public static async Task InitilizeDefaultAdminAccountsAsync(IServiceProvider serviceProvider)
+    public static async Task InitializeDefaultAdminAccountsAsync(IServiceProvider serviceProvider)
     {
         await using var scope = serviceProvider.CreateAsyncScope();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
@@ -48,8 +48,8 @@ internal class IdentityInitalizer
         {
             if (!await userManager.Users.AnyAsync())
             {
-                var defaultPassword = "MegaMaggot123!";
-                var defaultRoleName = "Admin";
+                string defaultPassword = "MegaMaggot123!";
+                string defaultRoleName = "Admin";
 
                 foreach (var admin in defaultAdmins)
                 {

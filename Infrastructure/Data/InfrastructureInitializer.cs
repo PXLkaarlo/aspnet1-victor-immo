@@ -5,16 +5,17 @@ namespace Infrastructure.Data;
 
 public class InfrastructureInitializer
 {
-    // Initialize the database and seed it with data. We will call this method in Program.cs after app.Run().
+    // Initialize the database and seed it with data. We will call this method in Program.cs before app.Run().
     public static async Task InitializeAsync(IServiceProvider service)
     {
-        // initialize database
+        // This is the method that will automatically create the database if it does not exist,
+        // and will apply any pending migrations.
         await PersistenceInitializer.InitializeDatabaseAsync(service);
 
-        // initialize default identity roles
-        await IdentityInitalizer.InitilizeDefaultRolesAsync(service);
 
-        // initialize default user accounts
-        await IdentityInitalizer.InitilizeDefaultAdminAccountsAsync(service);
+        await IdentityInitializer.InitializeDefaultRolesAsync(service);
+
+        // initialize default admin accounts
+        await IdentityInitializer.InitializeDefaultAdminAccountsAsync(service);
     }
 }
